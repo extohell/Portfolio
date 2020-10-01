@@ -5,24 +5,26 @@ const Span = styled.span.attrs(props => ({
 	style: {
 		left: props.coords.x + 'px',
 		top: props.coords.y + 'px',
-		transform: `translateX(-50%) rotate(${ props.coords.angle }deg)`
+		transform: `rotate(${ props.coords.angle }deg)`
 	},
 }))`
 	display: inline-block;
-	min-width: 8px;
-	position: absolute;
+	position: relative;
+	min-width: 15px;
 	
 	will-change: left, top, transform;
-	transition: transform 5s, opacity 5s;
+	transition: transform 3s, opacity 3s;
 	opacity: ${ props => props.opacity };
 	
-	font-size: 30px;
+	font-size: 50px;
+	font-family: 'Titillium Web', sans-serif;
+	font-weight: 900;
 `;
 
 const getRandomCoords = () => {
 	return {
-		x: Math.random() * (document.documentElement.clientWidth - 50),
-		y: Math.random() * (document.documentElement.clientHeight - 50)
+		x: Math.round(Math.random() * document.documentElement.clientWidth / 2.2 * (Math.random() < 0.5 ? -1 : 1)),
+		y: Math.round(Math.random() * document.documentElement.clientHeight / 2.2 * (Math.random() < 0.5 ? -1 : 1)),
 	};
 };
 
@@ -34,9 +36,13 @@ class Letter extends React.Component {
 		this.chain = [];
 		this.timers = {};
 		this.state = {
-			coords: { ...getRandomCoords(), angle: 0 },
+			coords: {
+				...getRandomCoords(),
+				angle: Math.random() * 180
+			},
 			opacity: 0
 		};
+		this.toCenter = false;
 	}
 
 	componentDidMount() {
@@ -62,11 +68,28 @@ class Letter extends React.Component {
 			});
 			this.setState(state => ({
 				...state,
-				coords: { ...this.chain[this.chain.length - 1] },
-				angle: (this.chain[this.chain.length - 1].x - this.target.x > 0 ? 1 : -1) * 360
+				coords: {
+					...this.chain[this.chain.length - 1],
+					angle: (this.chain[this.chain.length - 1].x - this.target.x > 0 ? 1 : -1) * 360
+				},
+
 			}));
-			setTimeout(() => this.setState(state => ({ ...state, opacity: 1 })));
 		}, 20);
+		setTimeout(() => this.setState(state => ({ ...state, opacity: 1 })), 100);
+		setTimeout(() => {
+			clearInterval(this.timers.target);
+			this.target = { x: 0, y: 0 };
+			this.toCenter = true;
+		}, 3000);
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		if (this.toCenter && Math.abs(this.state.coords.x) < 2 && Math.abs(this.state.coords.y) < 2) {
+			clearInterval(this.timers.chain);
+			this.setState(state => ({ ...state, coords: { x: 0, y: 0 } }));
+			this.toCenter = false;
+			setTimeout(() => this.props.setLoaded(true), 1500);
+		}
 	}
 
 	componentWillUnmount() {
@@ -75,7 +98,10 @@ class Letter extends React.Component {
 	}
 
 	render() {
-		return <Span coords={ this.state.coords } opacity={ this.state.opacity }>{ this.props.children }</Span>;
+		const { coords, opacity } = this.state;
+		const { children, index } = this.props;
+		return <Span index={ index } coords={ coords }
+					 opacity={ opacity }>{ children }</Span>;
 	}
 }
 

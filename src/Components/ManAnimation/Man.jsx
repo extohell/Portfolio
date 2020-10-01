@@ -55,7 +55,7 @@ const Div = styled.div.attrs(props => ({
 		left: 47%;
 		width: 40px;
 		height: 4px;
-		z-index: -2;
+		z-index: -11;
 		
 		background-color: #8b8b8b;
 		box-shadow: 0 0 10px 3px #8b8b8b, 0 0 5px 1px #8b8b8b;

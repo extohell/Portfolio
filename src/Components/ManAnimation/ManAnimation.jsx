@@ -17,7 +17,7 @@ const Graffiti = styled.span`
 	left: ${ props => props.coords.x + 30 }px;
 	width: 60px;
 	height: 60px;
-	z-index: -1;
+	z-index: -10;
 	
 	background-image: url(${ props => props.coords.img });
 	background-repeat: no-repeat;

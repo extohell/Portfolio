@@ -7,6 +7,7 @@ import Portfolio from './Components/Portfolio/Portfolio';
 import Curriculum from './Components/Curriculum/Curriculum';
 import Contacts from './Components/Contacts/Contacts';
 import ManAnimation from './Components/ManAnimation/ManAnimation';
+import NameAnimation from './Components/NameAnimation/NameAnimation';
 
 const ContentWrapper = styled.div`
 	max-width: 986px;
@@ -20,8 +21,8 @@ const ContentWrapper = styled.div`
 	&::before {
 		content: '';
 		position: fixed;
-		top: 20vh;
-		bottom: 20vh;
+		top: 0;
+		bottom: 0;
 		left: ${ props => props.left }px;
 		width: 2px;
 		
@@ -32,14 +33,16 @@ const ContentWrapper = styled.div`
 function App() {
 	const wrapperRef = useRef();
 	const [ contentOffsetLeft, setContentOffsetLeft ] = useState(0);
+	const [ loaded, setLoaded ] = useState(false);
 
 	useEffect(() => {
 		setContentOffsetLeft(wrapperRef.current.getBoundingClientRect().left);
-	}, []);
+	}, [ loaded ]);
 
 	return (
 		<>
 			{/*<ManAnimation/>*/ }
+			<NameAnimation name={ 'IVAN BEREZHNOI' } loaded={ loaded } setLoaded={ () => setLoaded(true) }/>
 			<Navbar contentOffsetLeft={ contentOffsetLeft }/>
 			<ContentWrapper ref={ wrapperRef } left={ contentOffsetLeft }>
 				<Switch>

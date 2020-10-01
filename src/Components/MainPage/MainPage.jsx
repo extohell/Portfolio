@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Name from './Name';
 
 const P = styled.p`
 	margin-bottom: 20px;
@@ -12,12 +11,12 @@ const P = styled.p`
 `;
 
 const MainPage = () => {
+
 	return (
 		<>
 			<P>
-				<span>Привет,&nbsp;</span> меня зовут &nbsp;
+				<span><b>Привет</b>,&nbsp;</span> меня зовут Бережной Иван;
 			</P>
-			<Name name={'Иван Бережной'}/>
 			<P>
 				Я - начинающий frontend разработчик и это мой сайт-портфолио (он был создан при помощи библиотеки React
 				и
