@@ -1,10 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+import { PositionWrapper } from '../../App';
 
 const Curriculum = () => {
 	return (
-		<div>
+		<PositionWrapper>
 			Curriculum vitae
-		</div>
+		</PositionWrapper>
 	);
 };
 

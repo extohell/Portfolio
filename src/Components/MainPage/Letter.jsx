@@ -13,7 +13,7 @@ const Span = styled.span.attrs(props => ({
 	min-width: 15px;
 	
 	will-change: left, top, transform;
-	transition: transform 3s, opacity 3s;
+	transition: transform 3s, opacity 3s ${ props => props.coords.x === 0 && props.coords.y === 0 && ', left 0.3s, top 0.3s' };
 	opacity: ${ props => props.opacity };
 	
 	font-size: 50px;
@@ -27,6 +27,7 @@ const getRandomCoords = () => {
 		y: Math.round(Math.random() * document.documentElement.clientHeight / 2.2 * (Math.random() < 0.5 ? -1 : 1)),
 	};
 };
+
 
 class Letter extends React.Component {
 	constructor(props) {
@@ -69,7 +70,8 @@ class Letter extends React.Component {
 			this.setState(state => ({
 				...state,
 				coords: {
-					...this.chain[this.chain.length - 1],
+					x: Math.round(this.chain[this.chain.length - 1].x),
+					y: Math.round(this.chain[this.chain.length - 1].y),
 					angle: (this.chain[this.chain.length - 1].x - this.target.x > 0 ? 1 : -1) * 360
 				},
 
@@ -84,11 +86,11 @@ class Letter extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
-		if (this.toCenter && Math.abs(this.state.coords.x) < 2 && Math.abs(this.state.coords.y) < 2) {
+		if (this.toCenter && Math.abs(this.state.coords.x) < 5 && Math.abs(this.state.coords.y) < 5) {
 			clearInterval(this.timers.chain);
 			this.setState(state => ({ ...state, coords: { x: 0, y: 0 } }));
 			this.toCenter = false;
-			setTimeout(() => this.props.setLoaded(true), 1500);
+			setTimeout(() => this.props.setLoaded(true), 1700);
 		}
 	}
 

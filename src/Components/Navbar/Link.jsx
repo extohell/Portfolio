@@ -129,7 +129,7 @@ const Border = styled.span`
 	}
 `;
 
-const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft }) => {
+const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded }) => {
 	const linkRef = useRef();
 	const [ linkCoords, setLinkCoords ] = useState({ width: 0, height: 0, clickX: 0, clickY: 0 });
 	const [ isHovered, setIsHovered ] = useState(false);
@@ -171,7 +171,7 @@ const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft }) => {
 			delimiterWidth: Math.random() * (80 - 40) + 40,
 			totalWidth: contentOffsetLeft - coords.left - linkRef.current.offsetWidth
 		});
-	}, [ contentOffsetLeft ]);
+	}, [ contentOffsetLeft, loaded ]);
 
 	const onSelect = (event) => {
 		if (event.target.closest('a').classList.contains('active')) return;

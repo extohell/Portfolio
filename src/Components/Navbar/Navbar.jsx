@@ -21,7 +21,7 @@ const navItems = [
 	{ path: '/contacts', en: 'Contacts', ru: 'Контакты', es: 'Contactos' },
 ];
 
-const Navbar = ({ contentOffsetLeft }) => {
+const Navbar = ({ contentOffsetLeft, loaded }) => {
 	const [ hoverScale, setHoverScale ] = useState(true);
 
 	const toggleScale = useCallback(() => setHoverScale(!hoverScale), [ hoverScale ]);
@@ -30,8 +30,10 @@ const Navbar = ({ contentOffsetLeft }) => {
 		<Ul>
 			{
 				navItems.map((item, i) => {
-					return <Li key={ i }><Link label={ item.en } to={ item.path } hoverScale={ hoverScale }
-											   toggleScale={ toggleScale } contentOffsetLeft={ contentOffsetLeft }/></Li>;
+					return <Li key={ i }><Link loaded={ loaded } label={ item.en } to={ item.path }
+											   hoverScale={ hoverScale }
+											   toggleScale={ toggleScale }
+											   contentOffsetLeft={ contentOffsetLeft }/></Li>;
 				})
 			}
 		</Ul>
