@@ -15,7 +15,7 @@ const ContentWrapper = styled.div`
 	max-width: 986px;
 	min-height: 100vh;
 	margin: 0 auto;
-	padding: 0 100px;
+	padding: 50px 100px;
 		
 	&::before {
 		content: '';

@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Link from './Link';
+import { withRouter } from 'react-router-dom';
 
 const Ul = styled.ul`
 	position: fixed;
@@ -21,8 +22,9 @@ const navItems = [
 	{ path: '/contacts', en: 'Contacts', ru: 'Контакты', es: 'Contactos' },
 ];
 
-const Navbar = ({ contentOffsetLeft, loaded }) => {
+const Navbar = ({ contentOffsetLeft, loaded, location }) => {
 	const [ hoverScale, setHoverScale ] = useState(true);
+	const [ activeLink, setActiveLink ] = useState(location.pathname);
 
 	const toggleScale = useCallback(() => setHoverScale(!hoverScale), [ hoverScale ]);
 
@@ -30,7 +32,9 @@ const Navbar = ({ contentOffsetLeft, loaded }) => {
 		<Ul>
 			{
 				navItems.map((item, i) => {
-					return <Li key={ i }><Link loaded={ loaded } label={ item.en } to={ item.path }
+					return <Li key={ i }><Link activeLink={ activeLink } setActiveLink={ setActiveLink }
+											   loaded={ loaded } label={ item.en }
+											   to={ item.path }
 											   hoverScale={ hoverScale }
 											   toggleScale={ toggleScale }
 											   contentOffsetLeft={ contentOffsetLeft }/></Li>;
@@ -40,4 +44,4 @@ const Navbar = ({ contentOffsetLeft, loaded }) => {
 	);
 };
 
-export default Navbar;
+export default withRouter(Navbar);

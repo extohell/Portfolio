@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import LinkLine from './LinkLine';
+import HoverBorder from './HoverBorder';
+import SelectedEffect from './SelectedEffect';
 
 const Wrapper = styled.div`
 	position: relative;
@@ -54,15 +56,6 @@ const A = styled(NavLink)`
 	&.active {
 		color: #ffffff;
 		
-		&::before {
-			width: ${ props => props.clickx < props.width / 10 || props.clickx > props.width - props.width / 10 ? props.width * 3
-	: props.width * 2 }px;
-			height: ${ props => props.clicky < props.height / 10 || props.clicky > props.height - props.height / 10 ? props.height * 4
-	: props.height * 3 }px;
-			
-			opacity: 1;
-		}
-		
 		& + div > div {
 			&::before,
 			&::after {
@@ -92,44 +85,7 @@ const A = styled(NavLink)`
 	}
 `;
 
-const BorderWrapper = styled.div`
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	
-	transform: scaleX(${ props => props.scale });
-`;
-
-const Border = styled.span`
-	position: absolute;
-	width: 0;
-	height: 2px;
-	
-	background-color: #000000;
-	
-	transition: all 0.5s;
-	
-	&.top,
-	&.left {
-		top: 0;
-		left: 0;
-	}
-
-	&.right,
-	&.bottom {
-		bottom: 0;
-		right: 0;
-	}
-	&.right,
-	&.left {
-		width: 2px;
-		height: 0;
-	}
-`;
-
-const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded }) => {
+const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded, activeLink, setActiveLink }) => {
 	const linkRef = useRef();
 	const [ linkCoords, setLinkCoords ] = useState({ width: 0, height: 0, clickX: 0, clickY: 0 });
 	const [ isHovered, setIsHovered ] = useState(false);
@@ -175,6 +131,7 @@ const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded })
 
 	const onSelect = (event) => {
 		if (event.target.closest('a').classList.contains('active')) return;
+		setActiveLink(to);
 
 		const coords = linkRef.current.getBoundingClientRect();
 		setLinkCoords({
@@ -191,15 +148,11 @@ const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded })
 
 	return (
 		<Wrapper>
-			<A ref={ linkRef } to={ to } exact onClick={ onSelect } width={ linkCoords.width }
-			   clickx={ linkCoords.clickX } height={ linkCoords.height } clicky={ linkCoords.clickY }>
-				<BorderWrapper scale={ scale }>
-					<Border className='top'/>
-					<Border className='right'/>
-					<Border className='bottom'/>
-					<Border className='left'/>
-				</BorderWrapper>
+			<A ref={ linkRef } to={ to } exact onClick={ onSelect }>
+				<HoverBorder scale={ scale }/>
 				{ label }
+				<SelectedEffect isActive={ activeLink === to } width={ linkCoords.width } eventX={ linkCoords.clickX }
+								height={ linkCoords.height } eventY={ linkCoords.clickY }/>
 			</A>
 			<LinkLine sizes={ lineSizes } label={ label }/>
 		</Wrapper>

@@ -1,12 +1,18 @@
 import React from 'react';
+import TextContent from '../TextContent/TextContent';
 import styled from 'styled-components';
-import { PositionWrapper } from '../../App';
+import content from './content';
+
+const CvPositionWrapper = styled.div`
+	position: absolute;
+	top: 50px;
+`
 
 const Curriculum = () => {
 	return (
-		<PositionWrapper>
-			Curriculum vitae
-		</PositionWrapper>
+		<CvPositionWrapper>
+			<TextContent content={content.ru}/>
+		</CvPositionWrapper>
 	);
 };
 
