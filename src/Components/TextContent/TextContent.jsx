@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import LanguageContext from '../../LanguageContext';
 
 const Div = styled.div`
 	margin-bottom: 20px;
@@ -8,6 +9,7 @@ const Div = styled.div`
 	
 	line-height: 1.7rem;
 	color: transparent;
+	word-break: break-word;
 	
 	&:first-child {
 		align-self: start;
@@ -59,6 +61,7 @@ const InnerSpan = styled.span`
 
 const TextContent = ({ content }) => {
 	const [ translate, setTranslate ] = useState(100);
+	const lang = useContext(LanguageContext);
 
 	useEffect(() => {
 		setTimeout(() => setTranslate(0), 1200);
@@ -67,7 +70,7 @@ const TextContent = ({ content }) => {
 	return (
 		<>
 			{
-				content.map((item, index) => {
+				content[lang].map((item, index) => {
 					return (
 						<Div key={ index }>
 							{ item }

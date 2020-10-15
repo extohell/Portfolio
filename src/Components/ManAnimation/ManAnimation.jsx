@@ -4,19 +4,20 @@ import Man from './Man';
 
 import react from '../../assets/image/logos/react.svg';
 import html from '../../assets/image/logos/html-5.svg';
-import git from '../../assets/image/logos/git.svg';
+import css from '../../assets/image/logos/css-5.svg';
+import php from '../../assets/image/logos/php.svg';
 import javascript from '../../assets/image/logos/javascript.svg';
 import redux from '../../assets/image/logos/redux.svg';
 import sass from '../../assets/image/logos/sass-1.svg';
 
-const graffitiImgs = [ react, html, git, javascript, redux, sass ].sort(() => Math.random() - 0.5);
+const graffitiImgs = [ react, javascript, php, redux, sass, css, html ].sort(() => Math.random() - 0.5);
 
 const Graffiti = styled.span`
 	position: absolute;
 	top: ${ props => props.coords.y + 30 }px;
 	left: ${ props => props.coords.x + 30 }px;
-	width: 60px;
-	height: 60px;
+	width: 80px;
+	height: 80px;
 	z-index: -10;
 	
 	background-image: url(${ props => props.coords.img });
@@ -24,10 +25,10 @@ const Graffiti = styled.span`
 	background-size: contain;
 	background-position: center;
 	
-	transform: rotate(${ props => props.coords.angle }deg);
+	//transform: rotate(${ props => props.coords.angle }deg);
 `;
 
-const ManAnimation = () => {
+const ManAnimation = ({ loaded }) => {
 	const [ graffiti, setGraffiti ] = useState(null);
 	const [ mainCoords, setMainCoords ] = useState({ x: 0, y: 0 });
 	const [ mainStage, setMainStage ] = useState(null);
@@ -48,9 +49,11 @@ const ManAnimation = () => {
 	}, []);
 
 	useEffect(() => {
-		getMainCoords();
-		setTimeout(() => setMainStage('painter'), 3000);
-	}, []);
+		if (loaded) {
+			getMainCoords();
+			setTimeout(() => setMainStage('painter'), 7000);
+		}
+	}, [ loaded ]);
 
 	useEffect(() => {
 		if (mainStage === 'painter') getMainCoords();
@@ -59,8 +62,8 @@ const ManAnimation = () => {
 	const getMainCoords = () => {
 		const doc = document.documentElement;
 		setMainCoords({
-			x: Math.random() * (doc.offsetWidth - 150 - 150) + 150,
-			y: Math.random() * (doc.offsetHeight - 300 - 150) + 150,
+			x: Math.random() * (doc.clientWidth - 150 - 150) + 150,
+			y: Math.random() * (doc.clientHeight - 300 - 150) + 150,
 		});
 	};
 

@@ -83,11 +83,10 @@ const Cloud = styled.span.attrs(props => ({
 }))`position: absolute;
 	right: 98px;
 	bottom: 80px;
-	width: 120px;
-	height: 120px;
+	width: 140px;
+	height: 140px;
 		
 	background-image: url(${ cloud.src });
-	background-color: #ffffff;
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -158,9 +157,9 @@ const Man = ({ coords, cleaner, drawGraffiti, graffiti, mainStage, setMainStage 
 								clearInterval(timers.current.main);
 								clearInterval(timers.current.bg);
 								if (cleaner) {
-									setTimeout(() => setMainStage('painter'), 6000);
+									setTimeout(() => setMainStage('painter'), 15000);
 								} else {
-									setTimeout(() => setMainStage('cleaner'), 3000);
+									setTimeout(() => setMainStage('cleaner'), 8000);
 								}
 								return -120;
 							}
@@ -188,7 +187,7 @@ const Man = ({ coords, cleaner, drawGraffiti, graffiti, mainStage, setMainStage 
 			case 'action':
 				if (!cleaner) {
 					timers.current.cloudBg = setInterval(() => {
-						setCloudBgTranslate((a) => a <= -120 * 2 ? 0 : a - 120);
+						setCloudBgTranslate((a) => a <= -140 * 2 ? 0 : a - 140);
 					}, 120);
 					const cloudCoords = cloudRef.current.getBoundingClientRect();
 					drawGraffiti(cloudCoords.left, cloudCoords.top);

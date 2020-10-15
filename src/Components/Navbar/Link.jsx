@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import LinkLine from './LinkLine';
 import HoverBorder from './HoverBorder';
 import SelectedEffect from './SelectedEffect';
+import { getInitialCoords, getNewCoords } from './functions';
+import LanguageContext from '../../LanguageContext';
+import { devices } from '../../mediaSizes';
 
 const Wrapper = styled.div`
 	position: relative;
@@ -22,6 +25,10 @@ const A = styled(NavLink)`
 	font-size: 20px;
 	
 	transition: color 0.2s;
+	
+	@media ${ devices.laptopL } {
+		font-size: 18px;
+	}
 	
 	&:hover {
 		.top, .bottom {
@@ -85,22 +92,17 @@ const A = styled(NavLink)`
 	}
 `;
 
-const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded, activeLink, setActiveLink }) => {
+const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded, activeLink, setActiveLink, mobileToggle }) => {
 	const linkRef = useRef();
-	const [ linkCoords, setLinkCoords ] = useState({ width: 0, height: 0, clickX: 0, clickY: 0 });
+	const [ linkCoords, setLinkCoords ] = useState({ width: 0, height: 0, eventX: 0, eventY: 0 });
 	const [ isHovered, setIsHovered ] = useState(false);
 	const [ scale, setScale ] = useState(1);
 	const [ lineSizes, setLineSizes ] = useState({ totalWidth: 0, height: 0, delimiterWidth: 0 });
+	const lang = useContext(LanguageContext);
 
 	useEffect(() => {
 		const link = linkRef.current;
-		const coords = link.getBoundingClientRect();
-		setLinkCoords({
-			width: coords.width,
-			height: coords.height,
-			clickX: coords.width / 2,
-			clickY: coords.height / 2
-		});
+		setLinkCoords(getInitialCoords(linkRef));
 		link.onmouseenter = () => {
 			if (!linkRef.current.classList.contains('active')) {
 				setIsHovered(true);
@@ -127,23 +129,22 @@ const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded, a
 			delimiterWidth: Math.random() * (80 - 40) + 40,
 			totalWidth: contentOffsetLeft - coords.left - linkRef.current.offsetWidth
 		});
-	}, [ contentOffsetLeft, loaded ]);
+	}, [ contentOffsetLeft, loaded, lang ]);
 
 	const onSelect = (event) => {
-		if (event.target.closest('a').classList.contains('active')) return;
+		if (activeLink === to) {
+			event.preventDefault();
+			return;
+		}
 		setActiveLink(to);
 
-		const coords = linkRef.current.getBoundingClientRect();
-		setLinkCoords({
-			...linkCoords,
-			clickX: event.clientX - coords.left,
-			clickY: event.clientY - coords.top
-		});
+		setLinkCoords(getNewCoords(linkRef, event, linkCoords));
 		setLineSizes({
 			...lineSizes,
 			height: Math.random() * (80 - 30) + 30,
 			delimiterWidth: Math.random() * (70 - 30) + 30
 		});
+		mobileToggle();
 	};
 
 	return (
@@ -151,10 +152,12 @@ const Link = ({ to, label, hoverScale, toggleScale, contentOffsetLeft, loaded, a
 			<A ref={ linkRef } to={ to } exact onClick={ onSelect }>
 				<HoverBorder scale={ scale }/>
 				{ label }
-				<SelectedEffect isActive={ activeLink === to } width={ linkCoords.width } eventX={ linkCoords.clickX }
-								height={ linkCoords.height } eventY={ linkCoords.clickY }/>
+				<SelectedEffect isActive={ activeLink === to } width={ linkCoords.width } eventX={ linkCoords.eventX }
+								height={ linkCoords.height } eventY={ linkCoords.eventY }/>
 			</A>
-			<LinkLine sizes={ lineSizes } label={ label }/>
+			{
+				document.documentElement.clientWidth > 1024 && <LinkLine sizes={ lineSizes } label={ label }/>
+			}
 		</Wrapper>
 	);
 };

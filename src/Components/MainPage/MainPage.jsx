@@ -7,7 +7,7 @@ const MainPage = () => {
 
 	return (
 		<PositionWrapper>
-			<TextContent content={ content.ru }/>
+			<TextContent content={ content }/>
 		</PositionWrapper>
 	);
 };

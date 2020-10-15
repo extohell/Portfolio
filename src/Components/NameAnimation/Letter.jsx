@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { devices } from '../../mediaSizes';
 
 const Span = styled.span.attrs(props => ({
 	style: {
@@ -19,15 +20,18 @@ const Span = styled.span.attrs(props => ({
 	font-size: 50px;
 	font-family: 'Titillium Web', sans-serif;
 	font-weight: 900;
+	
+	@media ${ devices.mobileL } {
+		font-size: 40px;
+	}
 `;
 
 const getRandomCoords = () => {
 	return {
-		x: Math.round(Math.random() * document.documentElement.clientWidth / 2.2 * (Math.random() < 0.5 ? -1 : 1)),
-		y: Math.round(Math.random() * document.documentElement.clientHeight / 2.2 * (Math.random() < 0.5 ? -1 : 1)),
+		x: Math.round(Math.random() * document.documentElement.clientWidth / 2 * (Math.random() < 0.5 ? -1 : 1)),
+		y: Math.round(Math.random() * document.documentElement.clientHeight / 2 * (Math.random() < 0.5 ? -1 : 1)),
 	};
 };
-
 
 class Letter extends React.Component {
 	constructor(props) {
@@ -44,7 +48,10 @@ class Letter extends React.Component {
 			opacity: 0
 		};
 		this.toCenter = false;
+		this.updateTime = document.documentElement.clientWidth <= 768 ? 5 : 20;
 	}
+
+	static allTransitionEnd = [];
 
 	componentDidMount() {
 		for (let i = 0; i < 10; i++) {
@@ -76,7 +83,7 @@ class Letter extends React.Component {
 				},
 
 			}));
-		}, 20);
+		}, this.updateTime);
 		setTimeout(() => this.setState(state => ({ ...state, opacity: 1 })), 100);
 		setTimeout(() => {
 			clearInterval(this.timers.target);
@@ -90,7 +97,11 @@ class Letter extends React.Component {
 			clearInterval(this.timers.chain);
 			this.setState(state => ({ ...state, coords: { x: 0, y: 0 } }));
 			this.toCenter = false;
-			setTimeout(() => this.props.setLoaded(true), 1700);
+			Letter.allTransitionEnd.push(true);
+			if (Letter.allTransitionEnd.length === this.props.nameArr.length &&
+			Letter.allTransitionEnd.every(bool => bool === true)) {
+				setTimeout(() => this.props.setLoaded(true), 1000);
+			}
 		}
 	}
 
