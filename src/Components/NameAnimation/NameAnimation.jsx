@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import Letter from './Letter';
 import { devices } from '../../mediaSizes';
