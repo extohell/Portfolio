@@ -33,7 +33,7 @@ const nastiDesc = {
 			</P>
 			<P>
 				Сайт: <A target='_blank' href="http://nastiprazdnik.ru">nastiprazdnik.ru</A><br/>
-				Исходный код: <A target='_blank' href="#">github</A>
+				Исходный код: <A target='_blank' href="https://github.com/extohell/Nastiprazdnik">github</A>
 			</P>
 		</>
 	),
@@ -51,7 +51,7 @@ const nastiDesc = {
 			</P>
 			<P>
 				Site: <A target='_blank' href="http://nastiprazdnik.ru">nastiprazdnik.ru</A><br/>
-				Source code: <A target='_blank' href="#">github</A>
+				Source code: <A target='_blank' href="https://github.com/extohell/Nastiprazdnik">github</A>
 			</P>
 		</>
 	),
@@ -69,7 +69,7 @@ const nastiDesc = {
 			</P>
 			<P>
 				Sitio: <A target='_blank' href="http://nastiprazdnik.ru">nastiprazdnik.ru</A><br/>
-				Código fuente: <A target='_blank' href="#">github</A>
+				Código fuente: <A target='_blank' href="https://github.com/extohell/Nastiprazdnik">github</A>
 			</P>
 		</>
 	)
