@@ -2,8 +2,8 @@ import React from 'react';
 import { PositionWrapper } from '../../App';
 import AppearanceWrapper from '../Common/AppearanceWrapper';
 import { devices } from '../../mediaSizes';
-
 import styled from 'styled-components';
+
 import vk_light from '../../assets/image/contacts/vk-light.svg';
 import vk_dark from '../../assets/image/contacts/vk-dark.svg';
 import github_light from '../../assets/image/contacts/github-light.svg';
@@ -14,41 +14,16 @@ import phone_light from '../../assets/image/contacts/phone-light.svg';
 import phone_dark from '../../assets/image/contacts/phone-dark.svg';
 import telegram_light from '../../assets/image/contacts/telegram-light.svg';
 import telegram_dark from '../../assets/image/contacts/telegram-dark.svg';
-import whats_light from '../../assets/image/contacts/whats-light.svg';
-import wahts_dark from '../../assets/image/contacts/whats-dark.svg';
-
-const vkLight = new Image();
-vkLight.src = vk_light;
-const vkDark = new Image();
-vkDark.src = vk_dark;
-const mailLight = new Image();
-mailLight.src = mail_light;
-const mailDark = new Image();
-mailDark.src = mail_dark;
-const phoneLight = new Image();
-phoneLight.src = phone_light;
-const phoneDark = new Image();
-phoneDark.src = phone_dark;
-const telegramLight = new Image();
-telegramLight.src = telegram_light;
-const telegramDark = new Image();
-telegramDark.src = telegram_dark;
-const githubLight = new Image();
-githubLight.src = github_light;
-const githubDark = new Image();
-githubDark.src = github_dark;
-const whatsLight = new Image();
-whatsLight.src = whats_light;
-const whatsDark = new Image();
-whatsDark.src = wahts_dark;
+import whatsApp_light from '../../assets/image/contacts/whats-light.svg';
+import whatsApp_dark from '../../assets/image/contacts/whats-dark.svg';
 
 const contactsData = [
-	{ img: vkLight.src, imgHover: vkDark.src, href: 'https://vk.com/extohell' },
-	{ img: mailLight.src, imgHover: mailDark.src, href: 'mailto:extohell@gmail.com' },
-	{ img: githubLight.src, imgHover: githubDark.src, href: 'https://github.com/extohell' },
-	{ img: phoneLight.src, imgHover: phoneDark.src, href: 'tel: +79631563757' },
-	{ img: telegramLight.src, imgHover: telegramDark.src, href: 'https://teleg.run/extohell' },
-	{ img: whatsLight.src, imgHover: whatsDark.src, href: 'https://wa.me/+79631563757' }
+	{ img: vk_light, imgHover: vk_dark, href: 'https://vk.com/extohell' },
+	{ img: mail_light, imgHover: mail_dark, href: 'mailto:extohell@gmail.com' },
+	{ img: whatsApp_light, imgHover: whatsApp_dark, href: 'https://wa.me/+79631563757' },
+	{ img: phone_light, imgHover: phone_dark, href: 'tel: +79631563757' },
+	{ img: github_light, imgHover: github_dark, href: 'https://github.com/extohell' },
+	{ img: telegram_light, imgHover: telegram_dark, href: 'https://teleg.run/extohell' }
 ];
 
 const A = styled.a`
@@ -59,13 +34,13 @@ const A = styled.a`
 	margin-right: 20px;
 	z-index: 1;
 	
-	background-image: url(${ props => props.img });
+	background-image: url(${ props => props.img }), url(${ props => props.imgHover });
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: contain;
 	
-	transition: background-image 0.2s, transform 0.2s;
+	transition: background-image 0.3s, transform 0.2s;
 	
 	@media ${ devices.laptopM } {
 		width: 50px;
@@ -78,7 +53,7 @@ const A = styled.a`
 	}
 	
 	&:hover {
-		background-image: url(${ props => props.imgHover });
+		background-image: url(${ props => props.imgHover }), url(${ props => props.img });
 		transform: scale(1.1) !important;
 	}
 	

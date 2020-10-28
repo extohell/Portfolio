@@ -36,6 +36,12 @@ const CvPositionWrapper = styled.div`
 		right: 40px;
 		padding-bottom: 60px;
 	}
+	
+	@media ${ devices.desktopL } {
+		top: 50%;
+		
+		transform: translateY(-50%);
+	}
 `;
 
 const Download = styled.a`

@@ -5,6 +5,7 @@ import nasti from '../../assets/image/portfolio/nasti.jpg';
 import cat from '../../assets/image/portfolio/cat.jpg';
 import device from '../../assets/image/portfolio/device.jpg';
 import parolGen from '../../assets/image/portfolio/parolGen.jpg';
+import memory from '../../assets/image/portfolio/MemoryGame.jpg';
 
 const P = styled.p`
 	margin-bottom: 5px;
@@ -142,11 +143,11 @@ const deviceDesc = {
 	ru: (
 		<>
 			<P>
-				Учебный макет для верстки с сайта html-academy. Начале обучения, практика
+				Учебный макет для верстки с сайта html-academy. Начало обучения, практика
 				фиксорованной верстки, HTML, CSS.
 			</P>
 			<P>
-				Использованные: HTML, SCSS, Javascript.
+				Технологии: HTML, SCSS, Javascript.
 			</P>
 			<P>
 				Демо: <A target='_blank' href={ process.env.PUBLIC_URL + '/demo/device/index.html' }>index</A>
@@ -196,7 +197,7 @@ const parolDesc = {
 				Простой генератор паролей. Практика Javascript.
 			</P>
 			<P>
-				Использованные: HTML, SCSS, Javascript.
+				Технологии: HTML, SCSS, Javascript.
 			</P>
 			<P>
 				Демо: <A target='_blank' href={ process.env.PUBLIC_URL + '/demo/ParolGenerator/index.html' }>index</A><br/>
@@ -234,6 +235,51 @@ const parolDesc = {
 	)
 };
 
+const memoryDesc = {
+	ru: (
+		<>
+			<P>
+				Игра на запоминание. Практика React.
+			</P>
+			<P>
+				Технологии: React, CSS Modules.
+			</P>
+			<P>
+				Демо: <A target='_blank' href='https://extohell.github.io/memory_game/'>index</A><br/>
+				Исходный код: <A target='_blank' href="https://github.com/extohell/memory_game">github</A>
+			</P>
+		</>
+	),
+	en: (
+		<>
+			<P>
+				Memory game. React practice.
+			</P>
+			<P>
+				Technologies: React, CSS Modules.
+			</P>
+			<P>
+				Demo: <A target='_blank' href='https://extohell.github.io/memory_game/'>index</A><br/>
+				Source code: <A target='_blank' href="https://github.com/extohell/memory_game">github</A>
+			</P>
+		</>
+	),
+	es: (
+		<>
+			<P>
+				El juego de memoria. Una práctica de React.
+			</P>
+			<P>
+				Tecnologías: React, CSS Modules.
+			</P>
+			<P>
+				Demo: <A target='_blank' href='https://extohell.github.io/memory_game/'>index</A><br/>
+				Código fuente: <A target='_blank' href="https://github.com/extohell/memory_game">github</A>
+			</P>
+		</>
+	)
+};
+
 const portfolioItems = [
 	{
 		title: 'Nastiprazdnik',
@@ -244,6 +290,26 @@ const portfolioItems = [
 		},
 		fullDescription: nastiDesc,
 		img: [ nasti ],
+	},
+	{
+		title: 'ParolGenerator',
+		description: {
+			ru: 'Простой генератор паролей.',
+			en: 'Simple password generator',
+			es: 'El generador de contraseñas simple.'
+		},
+		fullDescription: parolDesc,
+		img: [ parolGen ],
+	},
+	{
+		title: 'MemoryGame',
+		description: {
+			ru: 'Игра на запоминание',
+			en: 'Memory Game',
+			es: 'El juego de memoria.'
+		},
+		fullDescription: memoryDesc,
+		img: [ memory ],
 	},
 	{
 		title: 'Cat-Energy',
@@ -264,16 +330,6 @@ const portfolioItems = [
 		},
 		fullDescription: deviceDesc,
 		img: [ device ],
-	},
-	{
-		title: 'ParolGenerator',
-		description: {
-			ru: 'Простой генератор паролей.',
-			en: 'Simple password generator',
-			es: 'El generador de contraseñas simple.'
-		},
-		fullDescription: parolDesc,
-		img: [ parolGen ],
 	}
 ];
 

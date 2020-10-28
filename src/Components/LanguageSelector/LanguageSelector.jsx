@@ -1,15 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import LanguageContext from '../../LanguageContext';
+import { devices } from '../../mediaSizes';
 
 import lang_light from '../../assets/image/language.svg';
 import lang_dark from '../../assets/image/language-dark.svg';
-import { devices } from '../../mediaSizes';
-
-const langLight = new Image();
-langLight.src = lang_light;
-const langDark = new Image();
-langDark.src = lang_dark;
 
 const Wrapper = styled.div`
 	position: absolute;
@@ -36,7 +31,7 @@ const Wrapper = styled.div`
 		height: 150px;
 		
 	 	div {
-			background-image: url(${ langDark.src });
+			background-image: url(${ lang_dark }), url(${lang_light });
 		}
 		span {
 			color: #ffffff;
@@ -85,7 +80,7 @@ const Bg = styled.div`
 	height: 50px;
 	z-index: 4;
 	
-	background-image: url(${ langLight.src });
+	background-image: url(${ lang_light }), url(${ lang_dark });
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: contain;

@@ -29,6 +29,10 @@ const Ul = styled.ul`
 		transition: 0s;
 		transition-delay: ${ props => props.show ? 0 : 1.3 }s;
 	}
+	
+	@media ${ devices.desktopL } {
+		left: 20%;
+	}
 `;
 
 const Li = styled.li`
