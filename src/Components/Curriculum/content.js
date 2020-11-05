@@ -33,10 +33,11 @@ const content = {
 			<ol>
 				<li>Уверенные знания HTML5, CSS3, SASS/SCSS, JavaScript (ES6).</li>
 				<li>React, Redux, CSS in JS (Styled Components, CSS Modules), основы TypeScript.</li>
+				<li>Vue, Vuex.</li>
 				<li>Базовые знания backend, PHP, работа с базами данных, MySQL.</li>
 				<li>Основы работы с GIT.</li>
 				<li>Photoshop, Figma для работы с макетами.</li>
-				<li>Вёрстка по БЭМ методологии, опыт использования Jquery, Bootstrap 3/4.</li>
+				<li>Вёрстка по БЭМ методологии, опыт использования Jquery, Bootstrap.</li>
 			</ol>
 		</div>,
 		<div>
@@ -102,10 +103,11 @@ const content = {
 			<ol>
 				<li>Strong knowledge of HTML5, CSS3, SASS / SCSS, JavaScript (ES6).</li>
 				<li>React, Redux, CSS in JS (Styled Components, CSS Modules), TypeScript basics.</li>
+				<li>Vue, Vuex.</li>
 				<li>Basic knowledge of backend, PHP, working with databases, MySQL.</li>
 				<li>Working with GIT.</li>
 				<li>Photoshop, Figma for HTML coding.</li>
-				<li>BEM methodology, experience of using Jquery, Bootstrap 3/4.</li>
+				<li>BEM methodology, experience of using Jquery, Bootstrap.</li>
 			</ol>
 		</div>,
 		<div>
@@ -173,10 +175,11 @@ const content = {
 			<ol>
 				<li>Fuerte conocimiento de HTML5, CSS3, SASS / SCSS, JavaScript (ES6).</li>
 				<li>React, Redux, CSS in JS (Styled Components, CSS Modules), conceptos básicos de TypeScript.</li>
+				<li>Vue, Vuex.</li>
 				<li>Conocimientos básicos de backend, PHP, trabajo con bases de datos, MySQL.</li>
 				<li>Trabajo con GIT.</li>
 				<li>Photoshop, Figma para trabajar con diseños.</li>
-				<li>BEM metodología, experiencia en el uso de Jquery, Bootstrap 3/4.</li>
+				<li>BEM metodología, experiencia en el uso de Jquery, Bootstrap.</li>
 			</ol>
 		</div>,
 		<div>
