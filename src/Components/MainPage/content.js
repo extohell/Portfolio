@@ -32,7 +32,7 @@ const content = {
 		(он был создан при помощи библиотеки React и Styled Components).<br/>
 		Исходный код:<A target='_blank' href="https://github.com/extohell/PortfolioSite">Github</A></div>,
 		<b>Мои профессиональные навыки:</b>,
-		<div>HTML, CSS, JavaScript, React, Redux, Sass, адаптивная и кроссбраузерная вёрстка.<br/>
+		<div>HTML, CSS, JavaScript, React, Redux, Vue, Nuxt, Sass, адаптивная и кроссбраузерная вёрстка.<br/>
 			Так же есть небольшой опыт работы и понимание общих принципов backend на PHP, MySQL.</div>,
 	],
 	en: [
@@ -41,7 +41,7 @@ const content = {
 			(it was created using React and Styled Components libraries)<br/>
 			Source code:<A target='_blank' href="https://github.com/extohell/PortfolioSite">Github</A></div>,
 		<b>My skills:</b>,
-		<div>HTML, CSS, JavaScript, React, Redux, Sass, adaptive and cross-browser layout. <br/>
+		<div>HTML, CSS, JavaScript, React, Redux, Vue, Nuxt, Sass, adaptive and cross-browser layout. <br/>
 			There is also little experience and understanding of the general principles of backend in PHP, MySQL.</div>,
 	],
 	es: [
@@ -50,7 +50,7 @@ const content = {
 			(fue creado usando bibliotecas React y Styled Components)<br/>
 			Código fuente:<A target='_blank' href="https://github.com/extohell/PortfolioSite">Github</A></div>,
 		<b>Mis habilidades profesionales:</b>,
-		<div>HTML, CSS, JavaScript, React, Redux, Sass, responsive y diseño de navegador cruzado. <br/>
+		<div>HTML, CSS, JavaScript, React, Redux, Vue, Nuxt, Sass, responsive y diseño de navegador cruzado. <br/>
 		También hay poca experiencia y comprensión de los principios generales del backend en PHP, MySQL.</div>,
 	]
 };

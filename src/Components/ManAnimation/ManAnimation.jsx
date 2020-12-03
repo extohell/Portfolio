@@ -9,8 +9,9 @@ import php from '../../assets/image/logos/php.svg';
 import javascript from '../../assets/image/logos/javascript.svg';
 import redux from '../../assets/image/logos/redux.svg';
 import sass from '../../assets/image/logos/sass-1.svg';
+import vue from '../../assets/image/logos/vue.svg';
 
-const graffitiImgs = [ react, javascript, php, redux, sass, css, html ].sort(() => Math.random() - 0.5);
+const graffitiImgs = [ react, vue, javascript, php, redux, sass, css, html ].sort(() => Math.random() - 0.5);
 
 const Graffiti = styled.span`
 	position: absolute;
@@ -32,7 +33,7 @@ const ManAnimation = ({ loaded }) => {
 	const [ graffiti, setGraffiti ] = useState(null);
 	const [ mainCoords, setMainCoords ] = useState({ x: 0, y: 0 });
 	const [ mainStage, setMainStage ] = useState(null);
-	const graffitiCounter = useRef(5);
+	const graffitiCounter = useRef(0);
 
 	const drawGraffiti = useCallback((x = null, y = null) => {
 		if (x === null || y === null) {
@@ -42,7 +43,7 @@ const ManAnimation = ({ loaded }) => {
 				x,
 				y,
 				img: graffitiImgs[graffitiCounter.current++],
-				angle: Math.round((Math.random() * (40 - 10) + 10) * (Math.random() < 0.5 ? -1 : 1))
+				// angle: Math.round((Math.random() * (40 - 10) + 10) * (Math.random() < 0.5 ? -1 : 1))
 			});
 		}
 		if (graffitiCounter.current >= graffitiImgs.length) graffitiCounter.current = 0;
