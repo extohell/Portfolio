@@ -1,97 +1,78 @@
-import React, { useCallback, useContext, useRef } from 'react';
-import styled, { keyframes } from 'styled-components';
-import AppearanceWrapper from '../Common/AppearanceWrapper';
+import React, { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import LanguageContext from '../../LanguageContext';
 import { devices } from '../../mediaSizes';
+import TextContent from '../TextContent/TextContent';
 
-const isMobile = document.documentElement.clientWidth <= 1024;
+const Title = styled.span`
+  position: absolute;
+  left: 0;
+  top: 50%;
+  cursor: pointer;
 
-const flip = keyframes`
-	0% {
-		transform: translateY(0) rotateX(0) scale(1);
-		transform-origin: 50% 0;
-		${ !isMobile && 'border: 2px solid #000000' };
-	}
-	50% {
-		transform: translateY(-50%) rotateX(-90deg) scale(1.588);
-		transform-origin: 50% 50%;
-		${ !isMobile && 'border: 1.5px solid #000000' };
-	}
-	100% {
-		transform: translateY(-130%) rotateX(-180deg) scale(1.588);
-		transform-origin: 50% 100%;
-		${ !isMobile && 'border: 1px solid #000000' };
-		cursor: auto;
-	}
-`;
+  transform: translateY(-50%);
+  transition: opacity 0.6s;
 
-const Wrapper = styled.div`
-	position: relative;
-	height: 150px;
-	
-	cursor: pointer;
-	
-	animation: ${ props => props.anim && flip } 0.8s linear forwards;
-	z-index: ${ props => props.anim ? 30 : 0 };
-	
-	div {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		
-		transform: scaleY(${ props => props.anim ? -1 : 1 });
-		transition-delay: ${ props => props.anim ? 0.4 : 0 }s;
-	}
-`;
+  font-size: 26px;
+  font-family: 'Montserrat Alternates';
+  font-weight: 900;
+  letter-spacing: -1px;
 
-const Bg = styled.div`
-	z-index: -1;
-	background-image: url(${ props => props.img });
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
+  ${props => (props.show ? `opacity: 0;` : `opacity: 1; transition-delay: 0.4s;`)}
 `;
 
 const Text = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 10px;
-	z-index: ${ props => props.anim ? 1 : -3 };
-		
-	font-size: 8px;
-	text-align: center;
-		
-	background-color: rgba(255, 255, 255, 0.9);
-	
-	@media ${ devices.laptopM } {
-		font-size: 7px;
-	}
+  transform: scaleY(0);
+  transform-origin: center;
+  max-height: 0;
+  max-width: 700px;
+  margin-left: 30px;
+  opacity: 0;
+  transition: max-height 1.2s, transform 0.6s, opacity 1.5s;
+
+  font-size: 14px;
+
+  ${props =>
+    props.show &&
+    `
+        transform: scaleY(1);
+        opacity: 1;
+        max-height: 300px;
+				 transition: max-height 2.5s, transform 0.6s, opacity 1.5s;
+				transition-delay: 0s, 0.4s;
+    `}
+
+  @media ${devices.tablet} {
+    margin-left: 0;
+  }
 `;
 
-const PortfolioItem = ({ data, anim, index, setHoverCoords }) => {
-	const ref = useRef();
-	const lang = useContext(LanguageContext);
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  min-height: 50px;
+  margin-bottom: 50px;
 
-	const onMouseEnter = useCallback(() => {
-		if (!anim) {
-			const coords = ref.current.getBoundingClientRect();
-			setHoverCoords(coords);
-		}
-	}, [ setHoverCoords, anim ]);
+  transition: all 2.5s;
+`;
 
-	return (
-		<Wrapper ref={ ref } className='portfolioItem' data-index={ index } anim={ anim }
-				 onMouseEnter={ onMouseEnter }>
-			<AppearanceWrapper border={ true } index={ index } transition={ 0.8 } width={ '100%' }>
-				<Bg img={ data.img }/>
-				<Text anim={ anim }>{ data.fullDescription[lang] }</Text>
-			</AppearanceWrapper>
-		</Wrapper>
-	);
+const PortfolioItem = ({ title, index, text, selected, onSelected }) => {
+  const lang = useContext(LanguageContext);
+  const [showText, setshowText] = useState(false);
+
+  useEffect(() => {
+    setshowText(index === selected);
+  }, [selected, index]);
+
+  return (
+    <Wrapper>
+      <Title show={showText} onClick={() => onSelected(index)}>
+        {/* <HoverBorder scale={1} /> */}
+        <TextContent inline={true} marker={index + 1} content={title} />
+      </Title>
+      <Text show={showText}>{text[lang]}</Text>
+    </Wrapper>
+  );
 };
 
 export default PortfolioItem;

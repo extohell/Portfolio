@@ -1,21 +1,21 @@
 import React from 'react';
-import { PositionWrapper } from '../../App';
-import AppearanceWrapper from '../Common/AppearanceWrapper';
-import { devices } from '../../mediaSizes';
 import styled from 'styled-components';
-
-import vk_light from '../../assets/image/contacts/vk-light.svg';
-import vk_dark from '../../assets/image/contacts/vk-dark.svg';
-import github_light from '../../assets/image/contacts/github-light.svg';
+import { PositionWrapper } from '../../App';
 import github_dark from '../../assets/image/contacts/github-dark.svg';
-import mail_light from '../../assets/image/contacts/mail-light.svg';
+import github_light from '../../assets/image/contacts/github-light.svg';
 import mail_dark from '../../assets/image/contacts/mail-dark.svg';
-import phone_light from '../../assets/image/contacts/phone-light.svg';
+import mail_light from '../../assets/image/contacts/mail-light.svg';
 import phone_dark from '../../assets/image/contacts/phone-dark.svg';
-import telegram_light from '../../assets/image/contacts/telegram-light.svg';
+import phone_light from '../../assets/image/contacts/phone-light.svg';
 import telegram_dark from '../../assets/image/contacts/telegram-dark.svg';
-import whatsApp_light from '../../assets/image/contacts/whats-light.svg';
+import telegram_light from '../../assets/image/contacts/telegram-light.svg';
+import vk_dark from '../../assets/image/contacts/vk-dark.svg';
+import vk_light from '../../assets/image/contacts/vk-light.svg';
 import whatsApp_dark from '../../assets/image/contacts/whats-dark.svg';
+import whatsApp_light from '../../assets/image/contacts/whats-light.svg';
+import { devices } from '../../mediaSizes';
+import AppearanceWrapper from '../Common/AppearanceWrapper';
+
 
 const contactsData = [
 	{ img: vk_light, imgHover: vk_dark, href: 'https://vk.com/extohell' },
@@ -33,30 +33,30 @@ const A = styled.a`
 	height: 70px;
 	margin-right: 20px;
 	z-index: 1;
-	
+
 	background-image: url(${ props => props.img }), url(${ props => props.imgHover });
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: contain;
-	
+
 	transition: background-image 0.3s, transform 0.2s;
-	
+
 	@media ${ devices.laptopM } {
 		width: 50px;
 		height: 50px;
 	}
-	
+
 	@media ${ devices.laptopS } {
 		width: 70px;
 		height: 70px;
 	}
-	
+
 	&:hover {
 		background-image: url(${ props => props.imgHover }), url(${ props => props.img });
 		transform: scale(1.1) !important;
 	}
-	
+
 	&.item1,
 	&.item3 {
 		&::before {
@@ -68,15 +68,15 @@ const A = styled.a`
 			bottom: -70%;
 			display: flex;
 			align-items: flex-end;
-			
+
 			text-align: center;
 			color: #000000;
 			white-space: nowrap;
 			font-weight: 600;
 			letter-spacing: -0.5em;
-			
+
 			transition: letter-spacing 0.5s;
-			
+
 			@media ${ devices.laptopM } {
 				font-size: 14px;
 			}
@@ -85,7 +85,7 @@ const A = styled.a`
 			}
 		}
 	}
-	
+
 	&.item3:hover::before {
 		content: '+7(963) 156-37-57';
 		letter-spacing: normal;
@@ -97,7 +97,6 @@ const A = styled.a`
 `;
 
 const Contacts = () => {
-
 	return (
 		<PositionWrapper>
 			{
