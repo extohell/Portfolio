@@ -214,7 +214,7 @@ const content = {
     <span>
       <b>Objetivo:</b>
       <br />
-      Desarrollar activamente como desarrollador frontend.
+      Desarrollarme activamente como desarrollador frontend.
     </span>,
     <div>
       <b>Sobre mí:</b>
